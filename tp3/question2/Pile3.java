@@ -20,52 +20,75 @@ public class Pile3 implements PileI {
 	}
 
 	public Pile3(int taille) {
-		// traiter le cas <=0
-		// à compléter
+	if (taille <= 0)taille = CAPACITE_PAR_DEFAUT;
+        this.v = new Vector<Object>(taille);
 	}
 
 	public void empiler(Object o) throws PilePleineException {
-		// à compléter
+	if (estPleine()) throw new PilePleineException();
+        this.v.addElement(o);
 	}
 
 	public Object depiler() throws PileVideException {
-		// à compléter
-		return null;
+		if (estVide())throw new PileVideException();
+        return this.v.remove(this.taille() -1);
 	}
 
 	public Object sommet() throws PileVideException {
-		// à compléter
-		return null;
+		if (estVide())throw new PileVideException();
+        return this.v.lastElement();
 	}
 
 	public int taille() {
-		// à compléter
-		return -1;
+		return this.v.size();
 	}
 
 	public int capacite() {
-		// à compléter
-		return -1;
+		return this.v.capacity();
 	}
 
 	public boolean estVide() {
-		// à compléter
-		return false;
-	}
+		return this.taille() == 0; 
+		      }
 
 	public boolean estPleine() {
-		// à compléter
-		return false;
+		return this.taille() == this.capacite();
 	}
 
 	public String toString() {
-		// à compléter
-		return "";
+	if (estVide())
+        return "[]";
+        StringBuffer sb = new StringBuffer("["); 
+        for (int i = this.taille() - 1; i >= 0; i--) {
+            sb.append(this.v.get(i));
+            if (i > 0)
+                sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
 	}
 
 	public boolean equals(Object o) {
-		// à compléter
-		return false;
+		PileI other = (PileI)o;
+        if (o == null)
+               return false;
+        if (!(o instanceof PileI))
+               return false;       
+        if (this.taille() != other.taille())
+               return false;
+         if (this.capacite() != other.capacite())
+               return false; 
+         
+         if (this == other)
+               return true;
+         
+               
+         if (other.taille() == 0)
+               return true;
+         if(this.toString().equals(other.toString())) 
+               return true;
+         
+        return false;
 	}
 
 	// fonction fournie

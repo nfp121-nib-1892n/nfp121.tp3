@@ -57,7 +57,7 @@ public class PilesAuMemeComportement extends junit.framework.TestCase {
 
     }
 
-    public void test_meme_comportement() throws Exception { 
+    public void test_meme_comportement() throws Exception {
         p4.empiler("aze");
         p3.empiler("aze");
         p2.empiler("aze");
@@ -172,5 +172,30 @@ public class PilesAuMemeComportement extends junit.framework.TestCase {
         assertEquals(" différence  sur la taille() ?? ",p3.taille(), p4.taille());
 
     }
+    public void test_hash() throws Exception{
+         p1.empiler(1);
+        p1.empiler(3);
+        p1.empiler(9);
+
+        p2.empiler(1);
+        p2.empiler(3);
+        p2.empiler(9);
+
+        p3.empiler(1);
+        p3.empiler(3);
+        p3.empiler(9);
+
+        p4.empiler(1);
+        p4.empiler(3);
+        p4.empiler(9);
+
+        assertEquals ("Hachages de p1 et p2 sont �gales ?", true,
+            p1.hashCode() == p2.hashCode());
+        assertEquals ("Hachages de p2 et p3 sont �gales ?", true,
+            p2.hashCode() == p3.hashCode());
+        assertEquals ("Hachages de p3 et p4 sont �gales ?", true,
+            p3.hashCode() == p4.hashCode());
 }
 
+
+}

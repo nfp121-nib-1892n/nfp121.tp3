@@ -5,7 +5,7 @@ import question1.PileVideException;
 
 /**
  * A remplacer en partie par votre classe Pile de la question 1.
- * 
+ *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
@@ -13,53 +13,77 @@ public class Pile implements PileI {
 
     private Object[] zone;
     private int ptr;
+    public int cap = CAPACITE_PAR_DEFAUT;
 
     public Pile(int taille) {
-        // traiter le cas <=0
-        // a completer
+        if (taille <= 0)taille = cap;
+        this.zone = new Object[taille];
+        this.ptr = 0;
     }
 
     public Pile() {
-        this(0);
+        this(CAPACITE_PAR_DEFAUT);
     }
 
     public void empiler(Object o) throws PilePleineException {
-        // a completer
+        if (estPleine())throw new PilePleineException();
+        this.zone[this.ptr] = o;
+        this.ptr++;
     }
 
     public Object depiler() throws PileVideException {
-        // a completer
-        return null;
+        if (estVide())throw new PileVideException();
+        this.ptr--;
+        return this.zone[ptr];
+        //return null;
     }
 
     public Object sommet() throws PileVideException {
-        // a completer
-        return null;
+        if (estVide())throw new PileVideException();
+        return this.zone[this.ptr - 1];
     }
 
     public int capacite() {
-        // a completer
-        return -1;
+        return this.zone.length;
     }
 
     public int taille() {
-        // a completer
-        return -1;
+        return this.ptr;
+
     }
 
     public boolean estVide() {
-        // a completer
-        return false;
+        return ptr == 0;
+
     }
 
     public boolean estPleine() {
-        // a completer
-        return false;
+        return ptr == zone.length;
     }
 
     public boolean equals(Object o) {
-        // a completer
+        PileI other = (PileI)o;
+        if (o == null)
+               return false;
+        if (!(o instanceof PileI))
+               return false;
+        if (this.taille() != other.taille())
+               return false;
+        if (this.capacite() != other.capacite())
+               return false;
+
+        if (this == other)
+               return true;
+
+
+        if (other.taille() == 0)
+               return true;
+        if(this.toString().equals(other.toString()))
+               return true;
+
         return false;
+
+        //return zone.equals(o);
     }
 
     // fonction fournie
@@ -68,7 +92,16 @@ public class Pile implements PileI {
     }
 
     public String toString() {
-        // a completer
-        return null;
+        if (estVide())
+            return "[]";
+        StringBuffer sb = new StringBuffer();
+        sb.append("[");
+        for (int i = ptr - 1; i >= 0; i--) {
+            sb.append((zone[i] == null)? "NULL":zone[i].toString());
+            if (i > 0)
+                sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }

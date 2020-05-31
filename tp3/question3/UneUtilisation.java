@@ -7,8 +7,8 @@ public class UneUtilisation {
     public static void main(String[] args) throws Exception {
         // d√©clarer p1
         // d√©clarer p2
-
-        // p1 est ici une pile de polygones r√©guliers PolygoneRegulier.java
+        PileI<PolygoneRegulier> p1 = new Pile2 (10);
+        PileI<PileI<PolygoneRegulier>> p2 = new Pile2 (10);
         p1.empiler(new PolygoneRegulier(4, 100));
         p1.empiler(new PolygoneRegulier(5, 100));
 
@@ -18,14 +18,13 @@ public class UneUtilisation {
         System.out.println(" la pile p2 = " + p2);
 
         try {
-            // p1.empiler(new PolygoneRegulier(5,100)); // d√©sormais une erreur de
-            // compilation
-            // ....
-            // String s = (String)p1.depiler(); // d√©sormais une erreur de
-            // compilation
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      //p1.empiler(new PolygoneRegulier(5,10)); // vÈrifiez qu'une exception est levÈe ‡ la compilation
+        
+      //String s = (String)p1.depiler();
+      //gives an error
+    } catch(Exception e ) {
+      e.printStackTrace();
+    }
     }
 
 }

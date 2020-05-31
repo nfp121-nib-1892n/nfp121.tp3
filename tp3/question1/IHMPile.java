@@ -30,7 +30,7 @@ public class IHMPile extends JFrame implements ActionListener{
         boutonEmpiler.addActionListener(this);
         boutonDepiler.addActionListener(this);
 
-        p = new Pile(5);
+        p = new Pile(6);
 
     }
 
@@ -41,12 +41,24 @@ public class IHMPile extends JFrame implements ActionListener{
 
             // en cas d'exception
             //contenu.setText( /* à compléter */"" + " estPleine !");
+            try {
+                Object obj = donnee.getText();
 
+                p.empiler(obj);
+                contenu.setText(p.toString()); 
+                } catch (PilePleineException pleineExc) {
+                contenu.setText(p.toString());
+            }
         }else{
-
-            // à compléter
-            // en cas d'exception
-            //contenu.setText( /* à compléter */"" + " estVide !");
+            try {
+                Object obj = p.depiler();
+            
+                sommet.setText(obj.toString());
+               
+                contenu.setText(p.toString()); 
+            } catch (PileVideException VideExc) {
+                contenu.setText(p.toString() );
+            }
         }
     }
 
